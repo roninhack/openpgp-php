@@ -50,7 +50,7 @@ class MessageVerification extends PHPUnit\Framework\TestCase
       public function testUncompressedOpsDSA() {
         $this->oneMessageDSA('pubring.gpg', 'uncompressed-ops-dsa.gpg');
       }
-    
+
       public function testUncompressedOpsDSAsha384() {
         $this->oneMessageDSA('pubring.gpg', 'uncompressed-ops-dsa-sha384.gpg');
       }
