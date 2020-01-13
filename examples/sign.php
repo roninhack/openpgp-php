@@ -9,7 +9,7 @@ $wkey = OpenPGP_Message::parse(file_get_contents('php://stdin'));
 $wkey = $wkey[0];
 
 /* Create a new literal data packet */
-$data = new OpenPGP_LiteralDataPacket('This is text.', array('format' => 'u', 'filename' => 'stuff.txt'));
+$data = new OpenPGP_LiteralDataPacket('This is text.', ['format' => 'u', 'filename' => 'stuff.txt']);
 
 /* Create a signer from the key */
 $sign = new OpenPGP_Crypt_RSA($wkey);

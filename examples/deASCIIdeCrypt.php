@@ -14,15 +14,17 @@ $msgASCII = file_get_contents($argv[3]);
 $keyEncrypted = OpenPGP_Message::parse(OpenPGP::unarmor($keyASCII, 'PGP PRIVATE KEY BLOCK'));
 
 // Try each secret key packet
-foreach($keyEncrypted as $p) {
-	if(!($p instanceof OpenPGP_SecretKeyPacket)) continue;
+foreach ($keyEncrypted as $p) {
+    if (!($p instanceof OpenPGP_SecretKeyPacket)) {
+        continue;
+    }
 
-	$key = OpenPGP_Crypt_Symmetric::decryptSecretKey($argv[2], $p);
+    $key = OpenPGP_Crypt_Symmetric::decryptSecretKey($argv[2], $p);
 
-	$msg = OpenPGP_Message::parse(OpenPGP::unarmor($msgASCII, 'PGP MESSAGE'));
+    $msg = OpenPGP_Message::parse(OpenPGP::unarmor($msgASCII, 'PGP MESSAGE'));
 
-	$decryptor = new OpenPGP_Crypt_RSA($key);
-	$decrypted = $decryptor->decrypt($msg);
+    $decryptor = new OpenPGP_Crypt_RSA($key);
+    $decrypted = $decryptor->decrypt($msg);
 
-	var_dump($decrypted);
+    var_dump($decrypted);
 }
